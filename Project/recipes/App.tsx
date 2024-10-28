@@ -20,7 +20,7 @@ const Home = ({data}:IData) => {
 
 
   return (
-    <View>
+    <View style={styles.cuisine} >
       {FilterData.map((data) => 
       <Text key={data.id}>
         {data.cuisine}
@@ -66,4 +66,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  cuisine:{
+    width: 100,
+    height:100,
+    backgroundColor:'white',
+  }
 });
