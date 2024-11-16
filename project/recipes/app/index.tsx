@@ -70,11 +70,9 @@ const Index = () => {
   const router = useRouter();
 
   return (
-    <recipesContext.Provider value={{ apiRecipes: apiRecipes, SetApiRecipes: SetApiRecipes }}>
-      <View style={styles.container}>
-        <Cousines router={router} />
-      </View>
-    </recipesContext.Provider>
+    <View style={styles.container}>
+      <Cousines router={router} />
+    </View>
   )
 }
 
