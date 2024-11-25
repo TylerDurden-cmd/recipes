@@ -5,11 +5,11 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link, Router, useRouter } from "expo-router";
 import { recipesContext } from "@/recipesContext";
 
-interface ICuisines {
+interface IRouter {
   router: Router;
 }
 
-const Cousines = ({ router }: ICuisines) => {
+const Cousines = ({ router }: IRouter) => {
 
   const { apiRecipes, SetApiRecipes } = useContext(recipesContext)
 
@@ -81,9 +81,7 @@ const styles = StyleSheet.create({
     backgroundColor: "orange",
     flex: 1,
     flexDirection: 'column',
-    flexWrap: 'wrap',
     alignItems: "center",
-    paddingTop: Constants.statusBarHeight,
   },
   cuisine: {
     marginTop: 5,
@@ -94,7 +92,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#000',
     width: 370,
-    minHeight: 250,
+    minHeight: 220,
     borderRadius: 25,
     maxHeight: 300,
     marginBottom: 25
