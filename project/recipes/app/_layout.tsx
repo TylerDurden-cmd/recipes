@@ -9,6 +9,9 @@ const RootLayout = () => {
     <recipesContext.Provider value={{ apiRecipes: apiRecipes, SetApiRecipes: SetApiRecipes }}>
       <Stack>
         <Stack.Screen name="index" options={{ title: "Home" }} />
+        <Stack.Screen name="[cuisine]" options={{ title: "Cuisine Details" }} />
+        <Stack.Screen name="[recipe]" options={{ title: "Recipe Details" }} />
+
       </Stack>
     </recipesContext.Provider>
   );

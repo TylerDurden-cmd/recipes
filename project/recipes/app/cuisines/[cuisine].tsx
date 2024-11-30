@@ -22,7 +22,7 @@ const Cuisines = () => {
             <FlatList
                 data={recipesOfCuisines}
                 renderItem={((item) =>
-                    <Pressable onPress={() => { router.push(`/${item.item.id}`) }} style={styles.item}>
+                    <Pressable onPress={() => { router.push({ pathname: "/recipes/[recipe]", params: { recipe: item.item.id } }) }} style={styles.item}>
                         <Image
                             style={styles.imageItem}
                             source={{

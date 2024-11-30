@@ -2,7 +2,7 @@ import Constants from "expo-constants";
 import { StyleSheet, ScrollView, View, Image, Text, Pressable } from "react-native";
 import { IRecipes } from "@/IRecipes";
 import React, { useContext, useEffect, useState } from "react";
-import { Link, Router, useRouter } from "expo-router";
+import { Link, Router, usePathname, useRouter } from "expo-router";
 import { recipesContext } from "@/recipesContext";
 
 interface IRouter {
@@ -46,7 +46,7 @@ const Cousines = ({ router }: IRouter) => {
     <>
       <ScrollView>
         {FilterData.map((data) =>
-          <Pressable onPress={() => { router.push(`/${data.cuisine}`) }}>
+          <Pressable onPress={() => { router.push({ pathname: "/cuisines/[cuisine]", params: { cuisine: data.cuisine } }) }}>
             <View key={data.id} style={styles.cuisine}>
               <Image source={CuisineImage(data.cuisine)} style={styles.imgCuisine} />
               <Text>
