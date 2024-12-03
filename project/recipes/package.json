@@ -14,14 +14,18 @@
   "jest": {
     "preset": "jest-expo"
   },
+  "resolutions": {
+    "expo-camera": "latest"
+  },
   "dependencies": {
     "@expo/ngrok": "^4.1.3",
     "@expo/vector-icons": "^14.0.2",
-    "@react-navigation/bottom-tabs": "^7.0.0",
+    "@react-navigation/bottom-tabs": "^7.1.3",
     "@react-navigation/drawer": "^7.0.4",
     "@react-navigation/native": "^7.0.0",
     "expo": "^52.0.7",
     "expo-blur": "~14.0.1",
+    "expo-camera": "~16.0.8",
     "expo-constants": "~17.0.3",
     "expo-font": "~13.0.1",
     "expo-haptics": "~14.0.0",
