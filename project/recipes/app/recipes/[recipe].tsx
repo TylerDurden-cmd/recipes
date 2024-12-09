@@ -1,4 +1,4 @@
-import { IRecipes } from "@/IRecipes";
+import { IRecipes } from "@/types";
 import { recipesContext } from "@/recipesContext";
 import { Stack, useLocalSearchParams } from "expo-router";
 import React, { useContext, useState } from "react";

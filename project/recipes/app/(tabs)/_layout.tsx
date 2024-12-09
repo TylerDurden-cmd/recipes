@@ -19,6 +19,14 @@ const TabsLayout = () => {
                     tabBarIcon: ({ color, size }) => <FontAwesome name="camera" size={size} color={color} />
                 }}
             />
+
+            <Tabs.Screen
+                name="create"
+                options={{
+                    headerShown: false,
+                    tabBarIcon: ({ color, size }) => <FontAwesome name="plus" size={size} color={color} />
+                }}
+            />
         </Tabs>
     )
 }

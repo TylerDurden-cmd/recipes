@@ -3,13 +3,7 @@ import { CameraCapturedPicture } from 'expo-camera';
 import React from 'react'
 import { TouchableOpacity, SafeAreaView, Image, StyleSheet, View } from 'react-native';
 
-const PhotoPreviewSection = ({
-    photo,
-    handleRetakePhoto
-}: {
-    photo: CameraCapturedPicture;
-    handleRetakePhoto: () => void;
-}) => (
+const PhotoPreviewSection = ({ photo, handleRetakePhoto, SavePhoto }: { photo: CameraCapturedPicture; handleRetakePhoto: () => void; SavePhoto: () => void }) => (
     <SafeAreaView style={styles.container}>
         <View style={styles.box}>
             <Image
@@ -18,10 +12,19 @@ const PhotoPreviewSection = ({
             />
         </View>
 
-        <View style={styles.buttonContainer}>
-            <TouchableOpacity style={styles.button} onPress={handleRetakePhoto}>
-                <Fontisto name='trash' size={36} color='black' />
-            </TouchableOpacity>
+
+        <View style={styles.containerButton}>
+            <View style={styles.buttonContainer}>
+                <TouchableOpacity style={styles.button} onPress={handleRetakePhoto}>
+                    <Fontisto name='trash' size={36} color='black' />
+                </TouchableOpacity>
+            </View>
+
+            <View style={styles.buttonContainer}>
+                <TouchableOpacity style={styles.button} onPress={SavePhoto}>
+                    <Fontisto name='save' size={36} color='black' />
+                </TouchableOpacity>
+            </View>
         </View>
     </SafeAreaView>
 );
@@ -50,7 +53,7 @@ const styles = StyleSheet.create({
         marginTop: '4%',
         flexDirection: 'row',
         justifyContent: "center",
-        width: '100%',
+        width: '30%',
     },
     button: {
         backgroundColor: 'gray',
@@ -58,6 +61,9 @@ const styles = StyleSheet.create({
         padding: 10,
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    containerButton: {
+        flexDirection: 'row',
     }
 
 });

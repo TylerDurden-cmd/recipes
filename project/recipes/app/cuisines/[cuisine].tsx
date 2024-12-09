@@ -3,7 +3,7 @@ import { Link, Stack, useLocalSearchParams, useRouter } from "expo-router"
 import { useContext } from "react";
 import { View, Text, StyleSheet, Image, ScrollView, FlatList, Pressable } from "react-native"
 import React from "react";
-import { IRecipes } from "@/IRecipes";
+import { IRecipes } from "@/types";
 
 const Cuisines = () => {
     /* handler voor de router params*/

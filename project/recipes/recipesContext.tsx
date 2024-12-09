@@ -1,5 +1,5 @@
 import React from "react";
-import { IRecipes } from "./IRecipes";
+import { IRecipes } from "./types";
 
 interface IRecipesContext {
     SetApiRecipes: (apiRecipes: IRecipes[]) => void;

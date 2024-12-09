@@ -1,8 +1,8 @@
 import Constants from "expo-constants";
 import { StyleSheet, ScrollView, View, Image, Text, Pressable } from "react-native";
-import { IRecipes } from "@/IRecipes";
+import { IRecipes } from "@/types";
 import React, { useContext, useEffect, useState } from "react";
-import { Link, Router, usePathname, useRouter } from "expo-router";
+import { Router, useRouter } from "expo-router";
 import { recipesContext } from "@/recipesContext";
 
 interface IRouter {
@@ -34,7 +34,8 @@ const Cousines = ({ router }: IRouter) => {
   );
 
   const GetApi = async () => {
-    const uri: IRecipes[] = await fetch("https://sampleapis.assimilate.be/recipes/recipes").then((resp) => resp.json());
+    const headers = { Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InMxNDUyOUBhcC5iZSIsImlhdCI6MTczMzczMjcxNH0.JIIkE58PSnOzzteSdxssqmQdE_ZA-5PyUecPB8Cygog` };
+    const uri: IRecipes[] = await fetch("https://sampleapis.assimilate.be/recipes/recipes", { headers }).then((resp) => resp.json());
     SetApiRecipes(uri);
   }
 

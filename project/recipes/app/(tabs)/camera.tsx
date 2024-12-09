@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { Button, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { FontAwesome } from "@expo/vector-icons";
 import PhotoPreviewSection from '@/components/PhotoPreviewSection';
+import { router } from 'expo-router';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function CameraComponent() {
     const [facing, setFacing] = useState<CameraType>('back');
@@ -49,8 +51,14 @@ export default function CameraComponent() {
 
     const handleRetakePhoto = () => SetPhoto(null);
 
+    const SavePhoto = async () => {
+        await AsyncStorage.setItem('photo', photo.base64)
+        console.log(await AsyncStorage.getItem("photo"))
+        router.push("/create")
+    }
+
     if (photo) {
-        return <PhotoPreviewSection photo={photo} handleRetakePhoto={handleRetakePhoto} />
+        return <PhotoPreviewSection photo={photo} handleRetakePhoto={handleRetakePhoto} SavePhoto={SavePhoto} />
     }
 
     return (
