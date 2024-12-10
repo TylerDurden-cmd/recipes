@@ -1,14 +1,35 @@
 import { IRecipes } from "@/types";
 import { recipesContext } from "@/recipesContext";
 import { Stack, useLocalSearchParams } from "expo-router";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { View, Text, StyleSheet, Image, Dimensions, ScrollView } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 const windowWidth = Dimensions.get("window").width;
 
 const Recipe = () => {
     const { recipe } = useLocalSearchParams<{ recipe: string }>();
     const { apiRecipes, SetApiRecipes } = useContext(recipesContext);
     const FilteredRecipe: IRecipes[] = apiRecipes.filter((item) => item.id.toString() === recipe)
+
+    // Image cache to store URIs dynamically
+    const [imageCache, setImageCache] = useState<Record<string, string>>({});
+
+    useEffect(() => {
+        const loadPictures = async () => {
+            const newImageCache: Record<string, string> = {};
+            for (let recipe of FilteredRecipe) {
+                const storedImage = await AsyncStorage.getItem(`photo: [${recipe.id}]`);
+                if (storedImage) {
+                    newImageCache[recipe.id] = storedImage;
+                }
+            }
+
+
+            setImageCache(newImageCache);
+        };
+
+        loadPictures();
+    }, [FilteredRecipe]);
 
     return (
         <View>
@@ -24,7 +45,7 @@ const Recipe = () => {
                                 <Image
                                     style={styles.imgRecipe}
                                     source={{
-                                        uri: `${recipe.photoUrl}`,
+                                        uri: `${recipe.photoUrl ? recipe.photoUrl : `data:image/jpg;base64,${imageCache[recipe.id]}`}`,
                                     }}
                                 />
                                 <View style={{ alignItems: 'center' }}>

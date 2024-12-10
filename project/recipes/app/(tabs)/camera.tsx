@@ -1,18 +1,20 @@
 import { CameraView, CameraType, useCameraPermissions } from 'expo-camera';
-import React, { useRef } from 'react';
+import React, { useContext, useRef } from 'react';
 import { useState } from 'react';
 import { Button, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { FontAwesome } from "@expo/vector-icons";
 import PhotoPreviewSection from '@/components/PhotoPreviewSection';
 import { router } from 'expo-router';
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { recipesContext } from '@/recipesContext';
 
 export default function CameraComponent() {
     const [facing, setFacing] = useState<CameraType>('back');
     const [permission, requestPermission] = useCameraPermissions();
     const [photo, SetPhoto] = useState<any>(null);
     const cameraRef = useRef<CameraView | null>(null);
-
+    const { apiRecipes, SetApiRecipes } = useContext(recipesContext);
+    const nextId = apiRecipes.reduce((max, r) => (r.id > max ? r.id : max), 0) + 1;
 
     if (!permission) {
         // Camera permissions are still loading.
@@ -52,8 +54,8 @@ export default function CameraComponent() {
     const handleRetakePhoto = () => SetPhoto(null);
 
     const SavePhoto = async () => {
-        await AsyncStorage.setItem('photo', photo.base64)
-        console.log(await AsyncStorage.getItem("photo"))
+        await AsyncStorage.setItem(`photo: [${nextId}]`, photo.base64)
+        /* console.log(await AsyncStorage.getItem(`photo: [${nextId}]`)) */
         router.push("/create")
     }
 

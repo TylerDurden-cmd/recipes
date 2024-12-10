@@ -46,7 +46,7 @@ const CreateRecipe = () => {
 
     useEffect(() => {
         const loadPhoto = async () => {
-            const photo = await AsyncStorage.getItem("photo");
+            const photo = await AsyncStorage.getItem(`photo: [${nextId}]`);
             if (photo) {
                 setPhotoUri(`data:image/jpg;base64,${photo}`);
             }
@@ -106,7 +106,6 @@ const CreateRecipe = () => {
                     style={styles.input}
                     placeholderTextColor="#888"
                     keyboardType="numeric"
-                    value={recipe.prepTime.toString()}
                     onChangeText={(text) => handleInputChange("prepTime", Number(text))}
                 />
                 <TextInput
@@ -114,7 +113,6 @@ const CreateRecipe = () => {
                     style={styles.input}
                     placeholderTextColor="#888"
                     keyboardType="numeric"
-                    value={recipe.cookTime.toString()}
                     onChangeText={(text) => handleInputChange("cookTime", Number(text))}
                 />
                 <TextInput
@@ -122,7 +120,6 @@ const CreateRecipe = () => {
                     style={styles.input}
                     placeholderTextColor="#888"
                     keyboardType="numeric"
-                    value={recipe.calories.toString()}
                     onChangeText={(text) => handleInputChange("calories", Number(text))}
                 />
                 <TextInput
@@ -130,7 +127,6 @@ const CreateRecipe = () => {
                     style={styles.input}
                     placeholderTextColor="#888"
                     keyboardType="numeric"
-                    value={recipe.servings.toString()}
                     onChangeText={(text) => handleInputChange("servings", Number(text))}
                 />
                 <TextInput
