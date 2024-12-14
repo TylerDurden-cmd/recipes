@@ -109,24 +109,86 @@ const Recipe = () => {
 }
 
 const styles = StyleSheet.create({
-
+    container: {
+        flex: 1,
+        backgroundColor: "#fafafa",
+    },
     flexBox: {
         flexDirection: "row",
         alignItems: "center",
-        gap: 10,
-        padding: 10,
+        justifyContent: "space-between",
+        padding: 15,
         marginBottom: 20,
-        marginTop: 5
+        backgroundColor: "#ffffff",
+        borderRadius: 12,
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.1,
+        shadowRadius: 6,
+        elevation: 3,
     },
-
     imgRecipe: {
-        width: windowWidth,
+        width: "90%",
         height: 250,
-        borderColor: "grey",
-        borderStyle: "solid",
-        borderWidth: 1
+        borderRadius: 12,
+        borderWidth: 1,
+        borderColor: "#e0e0e0",
+        marginVertical: 20,
+        alignSelf: "center",
+    },
+    noRecipeText: {
+        fontSize: 20,
+        fontWeight: "bold",
+        textAlign: "center",
+        color: "#999",
+        marginTop: 50,
+        paddingHorizontal: 20,
+    },
+    sectionTitle: {
+        fontSize: 18,
+        fontWeight: "bold",
+        marginBottom: 10,
+        color: "#333",
+        textAlign: "center",
+    },
+    sectionText: {
+        fontSize: 16,
+        lineHeight: 22,
+        color: "#555",
+        textAlign: "left",
+        marginVertical: 5,
+    },
+    recipeContainer: {
+        padding: 20,
+        backgroundColor: "#ffffff",
+        borderRadius: 10,
+        marginHorizontal: 10,
+        marginBottom: 20,
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.1,
+        shadowRadius: 6,
+        elevation: 3,
+    },
+    ingredientsContainer: {
+        padding: 15,
+        backgroundColor: "#f7f7f7",
+        borderRadius: 10,
+        marginVertical: 10,
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.05,
+        shadowRadius: 4,
+        elevation: 1,
+    },
+    directionsContainer: {
+        padding: 15,
+        backgroundColor: "#f7f7f7",
+        borderRadius: 10,
+        marginVertical: 10,
+        shadowColor: "#000",
     }
+});
 
-})
 
 export default Recipe

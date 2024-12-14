@@ -1,13 +1,9 @@
-import Constants from "expo-constants";
 import { StyleSheet, ScrollView, View, Image, Text, Pressable } from "react-native";
 import { IRecipes } from "@/types";
 import React, { useContext, useEffect, useState } from "react";
-import { Router, useRouter } from "expo-router";
+import { useRouter } from "expo-router";
 import { recipesContext } from "@/recipesContext";
-
-interface IRouter {
-  router: Router;
-}
+import { IRouter } from "@/types";
 
 const Cousines = ({ router }: IRouter) => {
 

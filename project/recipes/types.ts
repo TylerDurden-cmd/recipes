@@ -1,3 +1,5 @@
+import { Router } from "expo-router";
+
 export interface IRecipes {
   id: number;
   title: string;
@@ -30,4 +32,18 @@ export interface IRecipes {
   fiber: string;
   protein: string;
   cost: string;
+}
+
+export interface IShoppingList {
+  id:number,
+  ingredients:string,
+} 
+
+export interface IImagePicker{
+  image: string | null;
+  setImage: (image: string | null) => void;
+}
+
+export interface IRouter {
+  router: Router;
 }
