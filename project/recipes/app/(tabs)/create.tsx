@@ -40,32 +40,32 @@ const CreateRecipe = () => {
     });
 
     const [photoUri, setPhotoUri] = useState<string>("");
-    const { apiRecipes, SetApiRecipes } = useContext(recipesContext);
+    const { apiRecipes, setApiRecipes } = useContext(recipesContext);
 
     const nextId = apiRecipes.reduce((max, r) => (r.id > max ? r.id : max), 0) + 1;
 
     useEffect(() => {
-        const loadPhoto = async () => {
+        const LoadPhoto = async () => {
             const photo = await AsyncStorage.getItem(`photo: [${nextId}]`);
             if (photo) {
                 setPhotoUri(`data:image/jpg;base64,${photo}`);
             }
         };
-        loadPhoto();
+        LoadPhoto();
     }, []);
 
-    const handleInputChange = (field: keyof IRecipes, value: string | number) => {
+    const HandleInputChange = (field: keyof IRecipes, value: string | number) => {
         setRecipe((prev) => ({
             ...prev,
             [field]: value,
         }));
     };
 
-    const handleSaveRecipe = async () => {
+    const HandleSaveRecipe = async () => {
         try {
             const newRecipe = { ...recipe, id: nextId };
             // Add the new recipe to the context
-            SetApiRecipes([...apiRecipes, newRecipe]);
+            setApiRecipes([...apiRecipes, newRecipe]);
             // Perform API request
             const response = await fetch("https://sampleapis.assimilate.be/recipes/recipes", {
                 method: "POST",
@@ -103,42 +103,42 @@ const CreateRecipe = () => {
                         style={styles.input}
                         placeholderTextColor="#888"
                         value={recipe.title}
-                        onChangeText={(text) => handleInputChange("title", text)}
+                        onChangeText={(text) => HandleInputChange("title", text)}
                     />
                     <TextInput
                         placeholder="Preparation Time (mins)"
                         style={styles.input}
                         placeholderTextColor="#888"
                         keyboardType="numeric"
-                        onChangeText={(text) => handleInputChange("prepTime", Number(text))}
+                        onChangeText={(text) => HandleInputChange("prepTime", Number(text))}
                     />
                     <TextInput
                         placeholder="Cooking Time (mins)"
                         style={styles.input}
                         placeholderTextColor="#888"
                         keyboardType="numeric"
-                        onChangeText={(text) => handleInputChange("cookTime", Number(text))}
+                        onChangeText={(text) => HandleInputChange("cookTime", Number(text))}
                     />
                     <TextInput
                         placeholder="Calories"
                         style={styles.input}
                         placeholderTextColor="#888"
                         keyboardType="numeric"
-                        onChangeText={(text) => handleInputChange("calories", Number(text))}
+                        onChangeText={(text) => HandleInputChange("calories", Number(text))}
                     />
                     <TextInput
                         placeholder="Servings"
                         style={styles.input}
                         placeholderTextColor="#888"
                         keyboardType="numeric"
-                        onChangeText={(text) => handleInputChange("servings", Number(text))}
+                        onChangeText={(text) => HandleInputChange("servings", Number(text))}
                     />
                     <TextInput
                         placeholder="Cuisine"
                         style={styles.input}
                         placeholderTextColor="#888"
                         value={recipe.cuisine}
-                        onChangeText={(text) => handleInputChange("cuisine", text)}
+                        onChangeText={(text) => HandleInputChange("cuisine", text)}
                     />
                     <TextInput
                         placeholder="Ingredients"
@@ -146,7 +146,7 @@ const CreateRecipe = () => {
                         placeholderTextColor="#888"
                         value={recipe.ingredients}
                         multiline
-                        onChangeText={(text) => handleInputChange("ingredients", text)}
+                        onChangeText={(text) => HandleInputChange("ingredients", text)}
                     />
                     <TextInput
                         placeholder="Directions"
@@ -154,9 +154,9 @@ const CreateRecipe = () => {
                         placeholderTextColor="#888"
                         value={recipe.directions}
                         multiline
-                        onChangeText={(text) => handleInputChange("directions", text)}
+                        onChangeText={(text) => HandleInputChange("directions", text)}
                     />
-                    <Button title="Save Recipe" color="#6200ea" onPress={handleSaveRecipe} />
+                    <Button title="Save Recipe" color="#6200ea" onPress={HandleSaveRecipe} />
                 </ScrollView>
             </View>
         </KeyboardAvoidingView>

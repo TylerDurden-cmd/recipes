@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { FlatList, View, Text, TextInput, Button, ScrollView, Pressable, StyleSheet } from "react-native"
+import { FlatList, View, Text, TextInput, Button, Pressable, StyleSheet } from "react-native"
 import { IShoppingList } from "@/types";
 import { FontAwesome } from "@expo/vector-icons";
 
@@ -25,8 +25,8 @@ const List = () => {
     }
 
     const deleteIngredients = (id: number) => {
-        const UpdatedList = shoppingList.filter((item) => item.id !== id);
-        setShoppingList(UpdatedList);
+        const updatedList = shoppingList.filter((item) => item.id !== id);
+        setShoppingList(updatedList);
     };
 
     return (

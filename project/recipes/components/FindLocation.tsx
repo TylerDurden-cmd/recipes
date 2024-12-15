@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Platform, Text, View, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import {
     requestForegroundPermissionsAsync,
     LocationObject,
@@ -31,7 +31,7 @@ const FindLocation = () => {
         text = JSON.stringify(location);
     }
 
-    const SuperMarkets = [
+    const superMarkets = [
         {
             id: 1,
             name: "Carrefour",
@@ -93,7 +93,7 @@ const FindLocation = () => {
                     }}
                     title="your location">
                 </Marker>
-                {SuperMarkets.map((supermarket) => (
+                {superMarkets.map((supermarket) => (
                     <Marker
                         key={supermarket.id}
                         coordinate={supermarket.location}

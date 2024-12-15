@@ -15,12 +15,12 @@ const Profile = () => {
     const [age, setAge] = useState<number>(0);
     const [savedAge, setSavedAge] = useState<number>(0);
 
-    const saveData = () => {
+    const SaveData = () => {
         setSavedName(name);
         setSavedEmail(email);
         setSavedAge(age);
         setUpdate(!update);
-        Alert.alert("Profile Updated", "Your profile has been updated successfully.");
+        { !update && Alert.alert("Profile Updated", "Your profile has been updated successfully."); }
     };
 
     return (
@@ -59,7 +59,7 @@ const Profile = () => {
                 <View style={styles.buttonContainer}>
                     <Pressable
                         style={styles.button}
-                        onPress={saveData}
+                        onPress={SaveData}
                     >
                         <Text style={styles.buttonText}>{update ? "Update" : "Save"}</Text>
                     </Pressable>

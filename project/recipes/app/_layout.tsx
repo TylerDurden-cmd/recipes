@@ -5,10 +5,10 @@ import React, { useContext, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 
 const RootLayout = () => {
-  const [apiRecipes, SetApiRecipes] = useState<IRecipes[]>([]);
+  const [apiRecipes, setApiRecipes] = useState<IRecipes[]>([]);
   return (
     <>
-      <recipesContext.Provider value={{ apiRecipes: apiRecipes, SetApiRecipes: SetApiRecipes }}>
+      <recipesContext.Provider value={{ apiRecipes: apiRecipes, setApiRecipes: setApiRecipes }}>
         <Stack>
           <Stack.Screen name="(tabs)" options={{ headerShown: true, title: 'recipes' }} />
         </Stack>

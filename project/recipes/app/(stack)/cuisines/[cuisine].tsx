@@ -49,7 +49,7 @@ const Cuisines = () => {
                         <Image
                             style={styles.imageItem}
                             source={{
-                                uri: item.photoUrl || `data:image/jpg;base64,${imageCache[item.id] || ""}`,
+                                uri: `${item.photoUrl ? item.photoUrl : `data:image/jpg;base64,${imageCache[item.id]}`}`,
                             }}
                             resizeMode="cover"
                         />

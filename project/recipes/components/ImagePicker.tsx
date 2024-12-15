@@ -1,13 +1,12 @@
-import { useState } from 'react';
 import { Button, Image, View, StyleSheet } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
-import React from 'react';
 import { IImagePicker } from '@/types';
+import React from 'react';
 
 
 export default function ImagePickerFunction({ image, setImage }: IImagePicker) {
 
-    const pickImage = async () => {
+    const PickImage = async () => {
         // No permissions request is necessary for launching the image library
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ['images', 'videos'],
@@ -31,7 +30,7 @@ export default function ImagePickerFunction({ image, setImage }: IImagePicker) {
                     style={styles.image}
                 />
             )}
-            <Button title="Add profile picture" onPress={pickImage} />
+            <Button title="Add profile picture" onPress={PickImage} />
         </View>
     );
 }

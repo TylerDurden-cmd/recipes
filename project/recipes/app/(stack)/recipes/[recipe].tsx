@@ -4,11 +4,10 @@ import { Stack, useLocalSearchParams } from "expo-router";
 import React, { useContext, useEffect, useState } from "react";
 import { View, Text, StyleSheet, Image, Dimensions, ScrollView } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-const windowWidth = Dimensions.get("window").width;
 
 const Recipe = () => {
     const { recipe } = useLocalSearchParams<{ recipe: string }>();
-    const { apiRecipes, SetApiRecipes } = useContext(recipesContext);
+    const { apiRecipes } = useContext(recipesContext);
     const FilteredRecipe: IRecipes[] = apiRecipes.filter((item) => item.id.toString() === recipe)
 
     // Image cache to store URIs dynamically
@@ -32,7 +31,7 @@ const Recipe = () => {
     }, [FilteredRecipe]);
 
     return (
-        <View>
+        <View style={styles.container}>
             {FilteredRecipe.length > 0 ?
 
                 <View>
@@ -111,7 +110,7 @@ const Recipe = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#fafafa",
+        backgroundColor: "#f8f8f8",
     },
     flexBox: {
         flexDirection: "row",

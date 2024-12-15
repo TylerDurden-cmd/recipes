@@ -7,7 +7,7 @@ import { IRouter } from "@/types";
 
 const Cousines = ({ router }: IRouter) => {
 
-  const { apiRecipes, SetApiRecipes } = useContext(recipesContext)
+  const { apiRecipes, setApiRecipes } = useContext(recipesContext)
 
   const CuisineImage = (cuisine: string) => {
     switch (cuisine) {
@@ -25,14 +25,14 @@ const Cousines = ({ router }: IRouter) => {
     }
   }
 
-  const FilterData = apiRecipes.filter((item, index, self) =>
+  const filterData = apiRecipes.filter((item, index, self) =>
     index === self.findIndex((t) => t.cuisine === item.cuisine) && item.cuisine != ""
   );
 
   const GetApi = async () => {
     const headers = { Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InMxNDUyOUBhcC5iZSIsImlhdCI6MTczMzczMjcxNH0.JIIkE58PSnOzzteSdxssqmQdE_ZA-5PyUecPB8Cygog` };
     const uri: IRecipes[] = await fetch("https://sampleapis.assimilate.be/recipes/recipes", { headers }).then((resp) => resp.json());
-    SetApiRecipes(uri);
+    setApiRecipes(uri);
   }
 
   useEffect(() => {
@@ -42,7 +42,7 @@ const Cousines = ({ router }: IRouter) => {
   return (
     <>
       <ScrollView>
-        {FilterData.map((data) =>
+        {filterData.map((data) =>
           <Pressable onPress={() => { router.push({ pathname: "/cuisines/[cuisine]", params: { cuisine: data.cuisine } }) }}>
             <View key={data.id} style={styles.cuisine}>
               <Image source={CuisineImage(data.cuisine)} style={styles.imgCuisine} />
@@ -75,7 +75,6 @@ const Index = () => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "orange",
     flex: 1,
     flexDirection: 'column',
     alignItems: "center",

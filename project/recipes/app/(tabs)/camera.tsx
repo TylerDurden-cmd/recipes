@@ -11,9 +11,9 @@ import { recipesContext } from '@/recipesContext';
 export default function CameraComponent() {
     const [facing, setFacing] = useState<CameraType>('back');
     const [permission, requestPermission] = useCameraPermissions();
-    const [photo, SetPhoto] = useState<any>(null);
+    const [photo, setPhoto] = useState<any>(null);
     const cameraRef = useRef<CameraView | null>(null);
-    const { apiRecipes, SetApiRecipes } = useContext(recipesContext);
+    const { apiRecipes } = useContext(recipesContext);
     const nextId = apiRecipes.reduce((max, r) => (r.id > max ? r.id : max), 0) + 1;
 
     if (!permission) {
@@ -32,11 +32,11 @@ export default function CameraComponent() {
         );
     }
 
-    function toggleCameraFacing() {
+    function ToggleCameraFacing() {
         setFacing(current => (current === 'back' ? 'front' : 'back'));
     }
 
-    const handleTakePhoto = async () => {
+    const HandleTakePhoto = async () => {
         if (cameraRef.current) {
             const options = {
                 quality: 1,
@@ -46,12 +46,12 @@ export default function CameraComponent() {
 
             const takedPhoto = await cameraRef.current.takePictureAsync(options);
 
-            SetPhoto(takedPhoto)
+            setPhoto(takedPhoto)
         }
 
     };
 
-    const handleRetakePhoto = () => SetPhoto(null);
+    const HandleRetakePhoto = () => setPhoto(null);
 
     const SavePhoto = async () => {
         await AsyncStorage.setItem(`photo: [${nextId}]`, photo.base64)
@@ -60,17 +60,17 @@ export default function CameraComponent() {
     }
 
     if (photo) {
-        return <PhotoPreviewSection photo={photo} handleRetakePhoto={handleRetakePhoto} SavePhoto={SavePhoto} />
+        return <PhotoPreviewSection photo={photo} handleRetakePhoto={HandleRetakePhoto} SavePhoto={SavePhoto} />
     }
 
     return (
         <View style={styles.container}>
             <CameraView style={styles.camera} facing={facing} ref={cameraRef}>
                 <View style={styles.buttonContainer}>
-                    <TouchableOpacity style={styles.button} onPress={toggleCameraFacing}>
+                    <TouchableOpacity style={styles.button} onPress={ToggleCameraFacing}>
                         <FontAwesome name='retweet' size={40} color={"black"} />
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.button} onPress={handleTakePhoto}>
+                    <TouchableOpacity style={styles.button} onPress={HandleTakePhoto}>
                         <FontAwesome name='camera' size={40} color={"black"} />
                     </TouchableOpacity>
                 </View>
