@@ -1,68 +1,135 @@
 import React, { useState } from "react";
-import { View, Image, Text, Pressable, StyleSheet } from "react-native";
-import { IRouter } from "@/types";
+import { View, Text, Pressable, StyleSheet, TextInput, Alert, ScrollView, KeyboardAvoidingView, Platform } from "react-native";
 import ImagePickerFunction from "@/components/ImagePicker";
 
-const profile = ({ router }: IRouter) => {
-    const noUserImage = require('@/assets/images/noUser.jpg');
+// Import the default image using require
+const noUserImage = require('@/assets/images/noUser.jpg');
+
+const Profile = () => {
     const [image, setImage] = useState<string | null>(noUserImage);
     const [update, setUpdate] = useState<boolean>(false);
-    return (
-        <View style={styles.container}>
-            <ImagePickerFunction setImage={setImage} image={image} />
-            {update && (
-                <View style={styles.textFieldContainer}>
-                    <Text style={styles.name}>
-                        Joachim
-                    </Text>
-                    <Text style={styles.email}>
-                        joachim.adomako@student.ap.be
-                    </Text>
-                    <Text>
-                        age: 21
-                    </Text>
-                </View>
-            )}
-            <Pressable
-                style={styles.button}
-                onPress={() => setUpdate(!update)}>
-                <Text style={styles.buttonText}>update </Text>
-            </Pressable>
-        </View>
+    const [name, setName] = useState<string>('');
+    const [savedName, setSavedName] = useState<string>('');
+    const [email, setEmail] = useState<string>('');
+    const [savedEmail, setSavedEmail] = useState<string>('');
+    const [age, setAge] = useState<number>(0);
+    const [savedAge, setSavedAge] = useState<number>(0);
 
+    const saveData = () => {
+        setSavedName(name);
+        setSavedEmail(email);
+        setSavedAge(age);
+        setUpdate(!update);
+        Alert.alert("Profile Updated", "Your profile has been updated successfully.");
+    };
+
+    return (
+        <KeyboardAvoidingView
+            style={styles.container}
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
+        >
+            <ScrollView style={styles.container}>
+                <View style={styles.imgContainer}>
+                    <ImagePickerFunction setImage={setImage} image={image} />
+                </View>
+                {!update && (
+                    <View style={styles.textFieldContainer}>
+                        <TextInput
+                            placeholder="Name"
+                            placeholderTextColor="#888"
+                            style={styles.input}
+                            onChangeText={(text) => setName(text)}
+                        />
+                        <TextInput
+                            placeholder="Email"
+                            placeholderTextColor="#888"
+                            style={styles.input}
+                            keyboardType="email-address"
+                            onChangeText={(text) => setEmail(text)}
+                        />
+                        <TextInput
+                            placeholder="Age"
+                            placeholderTextColor="#888"
+                            style={styles.input}
+                            keyboardType="numeric"
+                            onChangeText={(text) => setAge(Number(text))}
+                        />
+                    </View>
+                )}
+                <View style={styles.buttonContainer}>
+                    <Pressable
+                        style={styles.button}
+                        onPress={saveData}
+                    >
+                        <Text style={styles.buttonText}>{update ? "Update" : "Save"}</Text>
+                    </Pressable>
+                </View>
+                {update && (
+                    <View style={styles.textFieldContainer}>
+                        <Text style={styles.name}>{savedName}</Text>
+                        <Text style={styles.email}>{savedEmail}</Text>
+                        <Text style={styles.age}>{savedAge}</Text>
+                    </View>
+                )}
+            </ScrollView>
+        </KeyboardAvoidingView>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
         padding: 20,
+        backgroundColor: '#f8f8f8',
     },
-    textFieldContainer: {
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    name: {
-        fontSize: 24,
-        marginBottom: 20,
-    },
-    email: {
-        fontSize: 18,
-        color: 'gray',
-        marginBottom: 20,
+    input: {
+        width: '80%',
+        height: 50,
+        borderColor: 'gray',
+        borderWidth: 1,
+        borderRadius: 5,
+        paddingHorizontal: 15,
+        marginVertical: 10,
+        backgroundColor: 'white',
+        fontSize: 16,
     },
     button: {
-        marginTop: 30,
         backgroundColor: '#007BFF',
-        padding: 10,
+        padding: 15,
         borderRadius: 5,
+        marginTop: 20,
+        width: '80%',
+        alignItems: 'center',
     },
     buttonText: {
         color: 'white',
         fontSize: 16,
     },
+    textFieldContainer: {
+        marginTop: 20,
+        alignItems: 'center',
+    },
+    name: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        marginTop: 20,
+    },
+    email: {
+        fontSize: 18,
+        color: 'gray',
+        marginBottom: 10,
+    },
+    age: {
+        fontSize: 18,
+        color: 'gray',
+    },
+    buttonContainer: {
+        alignItems: 'center',
+    },
+    imgContainer: {
+        alignItems: 'center',
+        marginBottom: 20,
+    },
 });
 
-export default profile;
+export default Profile;

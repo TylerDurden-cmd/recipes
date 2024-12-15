@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useContext, useEffect, useState } from "react";
-import { Image, StyleSheet, View, TextInput, Button, ScrollView, Alert } from "react-native";
+import { Image, StyleSheet, View, TextInput, Button, ScrollView, Alert, KeyboardAvoidingView, Platform } from "react-native";
 import { IRecipes } from "@/types";
 import { recipesContext } from "@/recipesContext";
 
@@ -88,73 +88,78 @@ const CreateRecipe = () => {
     };
 
     return (
-        <View style={styles.container}>
-            <ScrollView contentContainerStyle={styles.scrollContent}>
-                <Image
-                    style={styles.imagePreview}
-                    source={{ uri: photoUri || undefined }}
-                />
-                <TextInput
-                    placeholder="Recipe Name"
-                    style={styles.input}
-                    placeholderTextColor="#888"
-                    value={recipe.title}
-                    onChangeText={(text) => handleInputChange("title", text)}
-                />
-                <TextInput
-                    placeholder="Preparation Time (mins)"
-                    style={styles.input}
-                    placeholderTextColor="#888"
-                    keyboardType="numeric"
-                    onChangeText={(text) => handleInputChange("prepTime", Number(text))}
-                />
-                <TextInput
-                    placeholder="Cooking Time (mins)"
-                    style={styles.input}
-                    placeholderTextColor="#888"
-                    keyboardType="numeric"
-                    onChangeText={(text) => handleInputChange("cookTime", Number(text))}
-                />
-                <TextInput
-                    placeholder="Calories"
-                    style={styles.input}
-                    placeholderTextColor="#888"
-                    keyboardType="numeric"
-                    onChangeText={(text) => handleInputChange("calories", Number(text))}
-                />
-                <TextInput
-                    placeholder="Servings"
-                    style={styles.input}
-                    placeholderTextColor="#888"
-                    keyboardType="numeric"
-                    onChangeText={(text) => handleInputChange("servings", Number(text))}
-                />
-                <TextInput
-                    placeholder="Cuisine"
-                    style={styles.input}
-                    placeholderTextColor="#888"
-                    value={recipe.cuisine}
-                    onChangeText={(text) => handleInputChange("cuisine", text)}
-                />
-                <TextInput
-                    placeholder="Ingredients"
-                    style={[styles.input, styles.textArea]}
-                    placeholderTextColor="#888"
-                    value={recipe.ingredients}
-                    multiline
-                    onChangeText={(text) => handleInputChange("ingredients", text)}
-                />
-                <TextInput
-                    placeholder="Directions"
-                    style={[styles.input, styles.textArea]}
-                    placeholderTextColor="#888"
-                    value={recipe.directions}
-                    multiline
-                    onChangeText={(text) => handleInputChange("directions", text)}
-                />
-                <Button title="Save Recipe" color="#6200ea" onPress={handleSaveRecipe} />
-            </ScrollView>
-        </View>
+        <KeyboardAvoidingView
+            style={styles.container}
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
+        >
+            <View style={styles.container}>
+                <ScrollView contentContainerStyle={styles.scrollContent}>
+                    <Image
+                        style={styles.imagePreview}
+                        source={{ uri: photoUri || undefined }}
+                    />
+                    <TextInput
+                        placeholder="Recipe Name"
+                        style={styles.input}
+                        placeholderTextColor="#888"
+                        value={recipe.title}
+                        onChangeText={(text) => handleInputChange("title", text)}
+                    />
+                    <TextInput
+                        placeholder="Preparation Time (mins)"
+                        style={styles.input}
+                        placeholderTextColor="#888"
+                        keyboardType="numeric"
+                        onChangeText={(text) => handleInputChange("prepTime", Number(text))}
+                    />
+                    <TextInput
+                        placeholder="Cooking Time (mins)"
+                        style={styles.input}
+                        placeholderTextColor="#888"
+                        keyboardType="numeric"
+                        onChangeText={(text) => handleInputChange("cookTime", Number(text))}
+                    />
+                    <TextInput
+                        placeholder="Calories"
+                        style={styles.input}
+                        placeholderTextColor="#888"
+                        keyboardType="numeric"
+                        onChangeText={(text) => handleInputChange("calories", Number(text))}
+                    />
+                    <TextInput
+                        placeholder="Servings"
+                        style={styles.input}
+                        placeholderTextColor="#888"
+                        keyboardType="numeric"
+                        onChangeText={(text) => handleInputChange("servings", Number(text))}
+                    />
+                    <TextInput
+                        placeholder="Cuisine"
+                        style={styles.input}
+                        placeholderTextColor="#888"
+                        value={recipe.cuisine}
+                        onChangeText={(text) => handleInputChange("cuisine", text)}
+                    />
+                    <TextInput
+                        placeholder="Ingredients"
+                        style={[styles.input, styles.textArea]}
+                        placeholderTextColor="#888"
+                        value={recipe.ingredients}
+                        multiline
+                        onChangeText={(text) => handleInputChange("ingredients", text)}
+                    />
+                    <TextInput
+                        placeholder="Directions"
+                        style={[styles.input, styles.textArea]}
+                        placeholderTextColor="#888"
+                        value={recipe.directions}
+                        multiline
+                        onChangeText={(text) => handleInputChange("directions", text)}
+                    />
+                    <Button title="Save Recipe" color="#6200ea" onPress={handleSaveRecipe} />
+                </ScrollView>
+            </View>
+        </KeyboardAvoidingView>
     );
 };
 
